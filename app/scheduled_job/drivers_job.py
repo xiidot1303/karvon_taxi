@@ -1,0 +1,38 @@
+from app.services.yandex_api_service import get_drivers_list
+from app.services.driver_service import update_or_create_driver
+from datetime import datetime
+
+def update_drivers():
+    driver_profiles = get_drivers_list()
+    for driver in driver_profiles:
+        # get main values list
+        account = driver["accounts"][0]
+        car = driver["car"] if "car" in driver else {}
+        current_status = driver["current_status"]
+        profile = driver["driver_profile"]
+        # get values account
+        balance = account["balance"]
+        balance = int(float(balance))
+        last_transaction_date = account["last_transaction_date"] if "last_transaction_date" in account else None
+        # get values car
+        callsign = car["callsign"] if "callsign" in car else ""
+        # get values status
+        status = current_status["status"]
+        # get values profile
+        profile_id = profile["id"]
+        first_name = profile["first_name"] if "first_name" in profile else ""
+        last_name = profile["last_name"] if "last_name" in profile else ""
+        phone = profile["phones"][0] if profile["phones"] else ''
+        # turn to datetime object
+        last_transaction = datetime.strptime(
+            last_transaction_date, 
+            "%Y-%m-%dT%H:%M:%S.%f%z"
+            ).replace(tzinfo=None) if last_transaction_date else None
+        # last_transaction = last_transaction.replace(tzinfo=None)
+
+        # create or update drivers
+        update_or_create_driver(
+            profile_id, first_name, last_name,
+            phone, status, callsign,
+            last_transaction, balance
+        )
