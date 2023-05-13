@@ -13,7 +13,8 @@ def update_drivers():
         # get values account
         balance = account["balance"]
         balance = int(float(balance))
-        last_transaction_date = account["last_transaction_date"] if "last_transaction_date" in account else None
+        # last_transaction_date = account["last_transaction_date"] if "last_transaction_date" in account else None
+        last_transaction_date = None
         # get values car
         callsign = car["callsign"] if "callsign" in car else ""
         # get values status
