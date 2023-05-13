@@ -48,4 +48,4 @@ def send_profile_info(request):
         response['Charset'] = 'utf-8'
         return response
     else:
-        HttpResponse('')
+        return HttpResponse('')
