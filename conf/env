@@ -12,3 +12,4 @@ YANDEX_CLIENT_ID=<yandex_client_id>
 YANDEX_API_KEY=<yandex_api_key>
 
 CLICK_SERVICE_ID=<click_service_id>
+PAYME_KEY=<payme_key>

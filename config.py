@@ -23,3 +23,7 @@ YANDEX_API_KEY = os.environ.get("YANDEX_API_KEY")
 
 # Click
 CLICK_SERVICE_ID = os.environ.get("CLICK_SERVICE_ID")
+if DEBUG:
+    PAYME_KEY = os.environ.get("PAYME_TEST_KEY")
+else:
+    PAYME_KEY = os.environ.get("PAYME_KEY")

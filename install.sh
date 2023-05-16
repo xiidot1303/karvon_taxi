@@ -26,6 +26,8 @@ read yandex_api_key
 
 echo "Click service ID:"
 read click_service_id
+echo "Payme Key:"
+read payme_key
 
 cp conf/env .env
 sed -i "s/<secret_key>/$secret_key/g" ".env"
@@ -36,6 +38,7 @@ sed -i "s/<bot_token>/$bot_token/g" ".env"
 sed -i "s/<yandex_client_id>/$yandex_client_id/g" ".env"
 sed -i "s/<yandex_api_key>/$yandex_api_key/g" ".env"
 sed -i "s/<click_service_id>/$click_service_id/g" ".env"
+sed -i "s/<payme_key>/$payme_key/g" ".env"
 
 createdb $project_title
 

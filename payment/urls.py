@@ -7,10 +7,11 @@ from django.contrib.auth.views import (
 )
 
 from payment.views import (
-    click
+    click, payme
 )
 
 urlpatterns = [
     # click endpoints
     path('click/get-info', click.send_profile_info),
+    path('payme/endpoint', payme.endpoint),
 ]
