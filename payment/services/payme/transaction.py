@@ -32,3 +32,6 @@ def cancel_transaction(obj: Trans, state: int, reason: int):
     obj.cancel_time = time_ts()
     obj.save()
     return
+
+def filter_transactions_by_createtime_period(from_, to):
+    return Trans.objects.filter(create_time__range = (from_, to))

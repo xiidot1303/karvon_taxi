@@ -70,3 +70,7 @@ def CheckTransaction(id):
         return result, None
     else:
         return None, Errors.TRANSACTION_NOT_FOUND
+    
+def GetStatement(from_, to):
+    transactions = filter_transactions_by_createtime_period(from_, to)
+    return Results.GET_STATEMENT(transactions), None

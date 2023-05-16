@@ -117,3 +117,30 @@ class Results:
         }
         return r
     
+    def GET_STATEMENT(transactions):
+        r = {
+            "transactions" : [
+                {
+                    "id" : t.payme_trans_id,
+                    "time" : t.time,
+                    "amount" : t.amount,
+                    "account" : {
+                        "callsign" : t.driver.callsign
+                    },
+                    "create_time" : t.create_time,
+                    "perform_time" : t.perform_time,
+                    "cancel_time" : t.cancel_time,
+                    "transaction" : str(t.id),
+                    "state" : t.state,
+                    "reason" : t.reason,
+                    # "receivers" : [
+                        # {
+                        #     "id" : "5305e3bab097f420a62ced0b",
+                        #     "amount" : 200000
+                        # },
+                    # ]
+                }
+                for t in transactions
+            ]
+        }
+        return r

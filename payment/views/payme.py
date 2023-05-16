@@ -52,6 +52,9 @@ def endpoint(request):
                 if method == "CheckTransaction":
                     payme_trans_id = params["id"]
                     result, error = CheckTransaction(payme_trans_id)
+                if method == "GetStatement":
+                    from_, to = params["from"], params["to"]
+                    result, error = GetStatement(from_, to)
 
 
 
