@@ -1,4 +1,5 @@
 from app.services.driver_service import get_driver_by_callsign
+from app.services.yandex_api_service import create_transaction as create_transaction_yandex
 from payment.resources.payme_responses import Errors, Results
 from payment.utils import time_ts
 from payment.services.payme.transaction import *
@@ -32,6 +33,15 @@ def PerformTransaction(id):
                 return {}, Errors.CANNOT_PERFORM_OPERATION
             # end transaction
             perform_transaction(trans_obj)
+            # send transaction to yandex api
+            try:
+                status_code = create_transaction_yandex(
+                    trans_obj.amount, 
+                    trans_obj.driver.profile_id,
+                )
+                assert status_code == 200
+            except:
+                return None, Errors.CANNOT_PERFORM_OPERATION
             # change driver yandex balance
             # -----
         else:

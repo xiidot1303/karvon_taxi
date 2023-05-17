@@ -32,3 +32,26 @@ dirvers_list_data = {
         }
     ]
 }
+
+def create_transaction_data(amount, category_id, description, driver_profile_id):
+    data = {
+        "amount": str(amount),
+        "category_id": category_id,
+        "description": description,
+        "driver_profile_id": driver_profile_id,
+        "park_id": YANDEX_CLIENT_ID
+    }
+    return data
+
+category_list_data={
+    "query": {
+        "category": {
+            "is_creatable": True,
+            "is_enabled": True
+        },
+        "park": {
+            "id": YANDEX_CLIENT_ID
+        }
+    }
+
+}

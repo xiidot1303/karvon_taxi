@@ -8,8 +8,12 @@ class LanguageAdmin(admin.ModelAdmin):
 class DriverAdmin(admin.ModelAdmin):
     list_display = ['profile_id', 'callsign', 'phone']
 
+class Yandex_transaction_categoryAdmin(admin.ModelAdmin):
+    list_display = ['category_id', 'name']
+
 admin.site.register(Language, LanguageAdmin)
 admin.site.register(Driver, DriverAdmin)
+admin.site.register(Yandex_transaction_category, Yandex_transaction_categoryAdmin)
 
 
 admin.site.site_header = 'Django admin'

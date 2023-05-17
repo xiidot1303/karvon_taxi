@@ -14,3 +14,7 @@ class Driver(models.Model):
     first_name = models.CharField(null=True, blank=True, max_length=255, default="")
     last_name = models.CharField(null=True, blank=True, max_length=255, default="")
     phone = models.CharField(null=True, blank=True, max_length=32, default="")
+
+class Yandex_transaction_category(models.Model):
+    category_id = models.CharField(null=True, blank=False, max_length=64)
+    name = models.CharField(null=True, blank=True, max_length=64)
