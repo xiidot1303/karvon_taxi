@@ -13,3 +13,4 @@ YANDEX_API_KEY=<yandex_api_key>
 
 CLICK_SERVICE_ID=<click_service_id>
 PAYME_KEY=<payme_key>
+PAYME_TEST_KEY=<payme_test_key>

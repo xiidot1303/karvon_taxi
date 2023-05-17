@@ -24,3 +24,4 @@ class Payme_transaction(models.Model):
         (10, "Неизвестная ошибка."),
     ]
     reason = models.IntegerField(null=True, blank=True, choices=REASON_CHOICES)
+    test = models.BooleanField(null=True, default=False)

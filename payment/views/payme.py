@@ -5,7 +5,7 @@ from payment.resources.payme_responses import *
 from payment.resources import payme_ips
 from payment.utils import *
 from payment.services.payme.merchant import *
-from config import PAYME_KEY
+from config import PAYME_KEY, PAYME_TEST_KEY
 
 @csrf_exempt
 def endpoint(request):
@@ -21,10 +21,16 @@ def endpoint(request):
             login, password = get_login_password_from_auth(auth)
             # check Authorization
             if (
-                not headers["X-Forwarded-For"] in payme_ips or
-                login != 'Paycom' or
-                password != PAYME_KEY
+                headers["X-Forwarded-For"] in payme_ips and
+                login == 'Paycom'
             ):
+                if password == PAYME_KEY:
+                    test = False
+                elif password == PAYME_TEST_KEY:
+                    test = True
+                else:
+                    error = Errors.NOT_ENOUGH_PRIVILEGES
+            else:
                 error = Errors.NOT_ENOUGH_PRIVILEGES
             
             # BODY
@@ -41,7 +47,7 @@ def endpoint(request):
                     time = params["time"]
                     amount = params["amount"]
                     callsign = params["account"]["callsign"]
-                    result, error = CreateTransaction(payme_trans_id, time, amount, callsign)
+                    result, error = CreateTransaction(payme_trans_id, time, amount, callsign, test)
                 if method == "PerformTransaction":
                     payme_trans_id = params["id"]
                     result, error = PerformTransaction(payme_trans_id)

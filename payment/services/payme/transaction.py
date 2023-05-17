@@ -2,7 +2,7 @@ from app.services import *
 from payment.models import Payme_transaction as Trans
 from payment.utils import time_ts
 
-def get_or_create_transaction(payme_trans_id, driver, amount, time, create_time) -> Trans:
+def get_or_create_transaction(payme_trans_id, driver, amount, time, create_time, test) -> Trans:
     obj, created = Trans.objects.get_or_create(payme_trans_id=payme_trans_id)
     if created:
         obj.driver = driver
@@ -10,6 +10,7 @@ def get_or_create_transaction(payme_trans_id, driver, amount, time, create_time)
         obj.time = time
         obj.create_time = create_time
         obj.state = 1
+        obj.test = test
         obj.save()
     return obj
 
@@ -34,4 +35,4 @@ def cancel_transaction(obj: Trans, state: int, reason: int):
     return
 
 def filter_transactions_by_createtime_period(from_, to):
-    return Trans.objects.filter(create_time__range = (from_, to))
+    return Trans.objects.filter(create_time__range = (from_, to), test = False)

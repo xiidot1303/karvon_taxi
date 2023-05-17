@@ -11,11 +11,11 @@ def CheckPerformTransaction(amount, callsign):
     else:
         return None, Errors.USER_NOT_FOUND
     
-def CreateTransaction(id, time, amount, callsign):
+def CreateTransaction(id, time, amount, callsign, test):
     if driver:=get_driver_by_callsign(callsign):
         if time_ts() - time >= 43200000:
             return {}, Errors.CANNOT_PERFORM_OPERATION
-        trans_obj = get_or_create_transaction(id, driver,amount, time_ts(), time)
+        trans_obj = get_or_create_transaction(id, driver,amount, time_ts(), time, test)
         create_time = trans_obj.create_time
         trans_id = str(trans_obj.id)
         state = trans_obj.state
@@ -31,19 +31,20 @@ def PerformTransaction(id):
             if time_ts() - trans_obj.create_time >= 43200000:
                 cancel_transaction(trans_obj, -1, 4)
                 return {}, Errors.CANNOT_PERFORM_OPERATION
+            # send transaction to yandex api
+            if not trans_obj.test:
+                try:
+                    # change driver yandex balance
+                    status_code = create_transaction_yandex(
+                        trans_obj.amount, 
+                        trans_obj.driver.profile_id,
+                    )
+                    assert status_code == 200
+                except:
+                    cancel_transaction(trans_obj, -1, 10)
+                    return None, Errors.CANNOT_PERFORM_OPERATION
             # end transaction
             perform_transaction(trans_obj)
-            # send transaction to yandex api
-            try:
-                status_code = create_transaction_yandex(
-                    trans_obj.amount, 
-                    trans_obj.driver.profile_id,
-                )
-                assert status_code == 200
-            except:
-                return None, Errors.CANNOT_PERFORM_OPERATION
-            # change driver yandex balance
-            # -----
         else:
             if trans_obj.state != 2:
                 return None, Errors.CANNOT_PERFORM_OPERATION
