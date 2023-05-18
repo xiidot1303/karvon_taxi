@@ -15,7 +15,7 @@ def CreateTransaction(id, time, amount, callsign, test):
     if driver:=get_driver_by_callsign(callsign):
         if time_ts() - time >= 43200000:
             return {}, Errors.CANNOT_PERFORM_OPERATION
-        trans_obj = get_or_create_transaction(id, driver,amount, time_ts(), time, test)
+        trans_obj = get_or_create_transaction(id, driver,amount/100, time_ts(), time, test)
         create_time = trans_obj.create_time
         trans_id = str(trans_obj.id)
         state = trans_obj.state
