@@ -26,3 +26,7 @@ CLICK_SERVICE_ID = os.environ.get("CLICK_SERVICE_ID")
 # Payme
 PAYME_KEY = os.environ.get("PAYME_KEY")
 PAYME_TEST_KEY = os.environ.get("PAYME_TEST_KEY")
+
+# Playmobile
+PLAYMOBILE_LOGIN = os.environ.get("PLAYMOBILE_LOGIN")
+PLAYMOBILE_PASSWORD = os.environ.get("PLAYMOBILE_PASSWORD")

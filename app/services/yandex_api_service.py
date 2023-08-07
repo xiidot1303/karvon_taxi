@@ -2,6 +2,7 @@ from app.services import *
 from config import YANDEX_API_KEY, YANDEX_CLIENT_ID
 from app.resources.yandex_api_data import *
 from app.services.transaction_category_service import get_transaction_category_id_by_name
+from datetime import datetime
 
 headers = {'Content-type': 'application/json',  # Определение типа данных
         'Accept': 'text/plain',
@@ -37,3 +38,7 @@ def get_transaction_category_list():
     data = category_list_data
     response, status = send_request(url, data, headers, type="post")
     return response
+
+def get_last_order_of_driver(driver_id):
+    url = url_body + '/v1/parks/orders/list'
+    data = order_history_data(driver_id)

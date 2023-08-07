@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'app.apps.app',
     'bot.apps.bot',
     'payment',
+    'sms.apps.sms',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
