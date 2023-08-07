@@ -14,6 +14,14 @@ class Driver(models.Model):
     first_name = models.CharField(null=True, blank=True, max_length=255, default="")
     last_name = models.CharField(null=True, blank=True, max_length=255, default="")
     phone = models.CharField(null=True, blank=True, max_length=32, default="")
+    last_order = models.DateTimeField(null=True, blank=True)
+    
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
+    def __str__(self) -> str:
+        return f"{self.first_name} {self.phone}"
 
 class Yandex_transaction_category(models.Model):
     category_id = models.CharField(null=True, blank=False, max_length=64)

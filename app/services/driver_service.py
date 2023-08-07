@@ -3,7 +3,7 @@ from app.models import Driver
 
 def update_or_create_driver(
     profile_id, first_name, last_name, phone,
-    status, callsign, last_transaction, balance    
+    status, callsign, last_transaction, balance, last_order 
 ):
     driver, created = Driver.objects.get_or_create(profile_id=profile_id)
     driver.first_name = first_name
@@ -13,6 +13,7 @@ def update_or_create_driver(
     driver.callsign = callsign
     driver.last_transaction = last_transaction
     driver.balance = balance
+    driver.last_order = last_order
     driver.save()
     return driver
 

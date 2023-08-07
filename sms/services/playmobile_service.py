@@ -16,24 +16,32 @@ def send_sms_by_newsletters(newsletters):
             'Accept': 'text/plain', 
             "Authorization": f"Basic {credentials_base64}"
             }
-
     data = {
         "messages": [
             {
-            "recipient": newsletter.phone[1:],
+            "recipient": newsletter.driver.phone[1:],
             "message-id": f"a{newsletter.id}",
                 "sms": {
                     "originator": "Karvontaxi",
                     "content": {
-                        "text": newsletter.text
+                        "text": generate_text(newsletter.text, newsletter.driver)
                     }
                 }
             }
             for newsletter in newsletters
         ]
     } 
-
     response = requests.post(url, json=data, headers=headers)
     # response = session.post(url, data=data, headers=headers)
-
     return response.status_code
+
+def generate_text(text, driver):
+    text = text.replace("**ism", driver.full_name)
+    if driver.balance > 6000:
+        text = text.replace("**balans", driver.balance)
+    else: 
+        text = text.replace("**balans", "")
+    text = text.replace("**pozivnoy", driver.callsign)
+    return text
+
+

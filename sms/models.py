@@ -1,7 +1,7 @@
 from django.db import models
 
 class Newsletter(models.Model):
-    phone = models.CharField(null=True, blank=True, max_length=32)
+    driver = models.ForeignKey('app.Driver', null=True, blank=False, on_delete=models.PROTECT)
     text = models.TextField(null=True, blank=True, max_length=1024)
     STATUS_CHOICES = [
         (0, 'waiting'),
@@ -11,6 +11,6 @@ class Newsletter(models.Model):
     datetime = models.DateTimeField(db_index=True, null=True, auto_now_add=True, blank=True)
 
 class Alert_by_last_order(models.Model):
-    since = models.IntegerField(null=True, blank=False)
+    since = models.IntegerField(null=True, blank=True)
     text = models.TextField(null=True, blank=False, max_length=1024)
     

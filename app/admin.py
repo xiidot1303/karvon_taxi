@@ -6,7 +6,7 @@ class LanguageAdmin(admin.ModelAdmin):
     list_display = ['user_ip', 'lang']
 
 class DriverAdmin(admin.ModelAdmin):
-    list_display = ['profile_id', 'callsign', 'phone']
+    list_display = ['profile_id', 'callsign', 'phone', 'last_order']
 
 class Yandex_transaction_categoryAdmin(admin.ModelAdmin):
     list_display = ['category_id', 'name']

@@ -56,7 +56,7 @@ category_list_data={
 
 }
 
-def order_history_data(driver_id, from_, to) 
+def order_history_data(driver_id, from_, to):
     data = {
         "limit": 1,
         "query": {

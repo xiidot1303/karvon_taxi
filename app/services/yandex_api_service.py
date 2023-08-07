@@ -41,4 +41,16 @@ def get_transaction_category_list():
 
 def get_last_order_of_driver(driver_id):
     url = url_body + '/v1/parks/orders/list'
-    data = order_history_data(driver_id)
+    now = datetime.now()
+    ago = datetime(2020, 1, 1)
+    now = now.strftime("%Y-%m-%dT%H:%M:%S%z") + "+00:00"
+    ago = ago.strftime("%Y-%m-%dT%H:%M:%S%z") + "+00:00"
+    data = order_history_data(driver_id, ago, now)
+    respone, status = send_request(url, data, headers, type="post")
+    try:
+        date_str = respone['orders'][0]['created_at']
+        datetime_obj = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S.%f%z").replace(tzinfo=None)
+        r = datetime_obj
+    except Exception as e:
+        r = None
+    return r

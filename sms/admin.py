@@ -2,7 +2,7 @@ from django.contrib import admin
 from sms.models import *
 
 class NewsletterAdmin(admin.ModelAdmin):
-    list_display = ['phone', 'text', 'datetime']
+    list_display = ['driver', 'text', 'datetime']
 
 class Alert_by_last_orderAdmin(admin.ModelAdmin):
     list_display = ['since', 'text']
