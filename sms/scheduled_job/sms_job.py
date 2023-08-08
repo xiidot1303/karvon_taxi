@@ -22,9 +22,10 @@ def alert_drivers():
         else:  
             drivers = Driver.objects.filter(last_order=None)
         # create newsletters for drivers
-        for driver in drivers:
-            Newsletter.objects.create(
-                driver = driver,
-                text = alert.text
-            )
+        
+        newsletters = Newsletter.objects.create(
+            text = alert.text
+        )
+        newsletters.drivers.set(drivers)
+        newsletters.save()
 
