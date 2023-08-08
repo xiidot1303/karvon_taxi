@@ -38,10 +38,10 @@ def send_sms_by_newsletters(newsletters):
 def generate_text(text, driver):
     text = text.replace("**ism", driver.full_name)
     if driver.balance > 6000:
-        text = text.replace("**balans", driver.balance)
+        text = text.replace("**balans", str(driver.balance))
     else: 
         text = text.replace("**balans", "")
-    text = text.replace("**pozivnoy", driver.callsign)
+    text = text.replace("**pozivnoy", str(driver.callsign))
     return text
 
 
