@@ -16,22 +16,23 @@ def send_sms_by_newsletters(newsletters):
             'Accept': 'text/plain', 
             "Authorization": f"Basic {credentials_base64}"
             }
-    data = {
-        "messages": [
-            {
-            "recipient": newsletter.driver.phone[1:],
-            "message-id": f"a{newsletter.id}",
-                "sms": {
-                    "originator": "Karvontaxi",
-                    "content": {
-                        "text": generate_text(newsletter.text, newsletter.driver)
+    for newsletter in newsletters:
+        data = {
+            "messages": [
+                {
+                "recipient": driver.phone[1:],
+                "message-id": f"a{newsletter.id}",
+                    "sms": {
+                        "originator": "Karvontaxi",
+                        "content": {
+                            "text": generate_text(newsletter.text, driver)
+                        }
                     }
                 }
-            }
-            for newsletter in newsletters
-        ]
-    } 
-    response = requests.post(url, json=data, headers=headers)
+                for driver in newsletter.get_drivers
+            ]
+        } 
+        response = requests.post(url, json=data, headers=headers)
     # response = session.post(url, data=data, headers=headers)
     return response.status_code
 
