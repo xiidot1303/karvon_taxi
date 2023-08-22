@@ -38,6 +38,7 @@ def send_sms_by_newsletters(newsletters):
 
 def generate_text(text, driver):
     text = text.replace("**ism", driver.full_name)
+    text = text.replace("**nomer", driver.phone)
     if driver.balance > 6000:
         text = text.replace("**balans", str(driver.balance))
     else: 
