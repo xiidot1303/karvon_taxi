@@ -24,7 +24,8 @@ def alert_drivers():
         # create newsletters for drivers
         
         newsletters = Newsletter.objects.create(
-            text = alert.text
+            text = alert.text,
+            driver_status = alert.driver_status
         )
         newsletters.drivers.set(drivers)
         newsletters.save()

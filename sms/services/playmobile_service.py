@@ -29,7 +29,7 @@ def send_sms_by_newsletters(newsletters):
                         }
                     }
                 }
-                for driver in newsletter.get_drivers
+                for driver in newsletter.get_drivers.filter(status=newsletter.driver_status)
             ]
         } 
         response = requests.post(url, json=data, headers=headers)
