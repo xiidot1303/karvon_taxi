@@ -16,7 +16,7 @@ headers = {
     'Authorization': auth_key
 }
 
-url = "https://api.atmos.uz/token?grant_type=client_credentials"
+url = "https://apigw.atmos.uz/token?grant_type=client_credentials"
 
 r = requests.post(url, headers=headers)
 print(r.content.decode())
