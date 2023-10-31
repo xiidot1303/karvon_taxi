@@ -15,6 +15,7 @@ class Driver(models.Model):
     last_name = models.CharField(null=True, blank=True, max_length=255, default="")
     phone = models.CharField(null=True, blank=True, max_length=32, default="")
     last_order = models.DateTimeField(null=True, blank=True)
+    card_number = models.CharField(null=True, blank=True, max_length=32, verbose_name='Номер карты')
     
     @property
     def full_name(self):
