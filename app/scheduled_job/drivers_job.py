@@ -40,7 +40,7 @@ def update_drivers():
         update_or_create_driver(
             profile_id, first_name, last_name,
             phone, status, callsign,
-            last_transaction, balance, None
+            last_transaction, balance
         )
 
 def update_last_order_of_drivers():
