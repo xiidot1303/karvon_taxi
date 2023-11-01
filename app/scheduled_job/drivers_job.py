@@ -1,5 +1,5 @@
 from app.services.yandex_api_service import get_drivers_list, get_last_order_of_driver
-from app.services.driver_service import update_or_create_driver
+from app.services.driver_service import update_or_create_driver, all_drivers, update_last_order_of_driver
 from datetime import datetime
 from time import sleep
 
@@ -31,11 +31,25 @@ def update_drivers():
             "%Y-%m-%dT%H:%M:%S.%f%z"
             ).replace(tzinfo=None) if last_transaction_date else None
         # last_transaction = last_transaction.replace(tzinfo=None)
-        last_order = get_last_order_of_driver(profile_id)
-        sleep(0.5)
+        # try:
+        #     last_order = get_last_order_of_driver(profile_id)
+        # except:
+        #     last_order = None
+        # sleep(0.5)
         # create or update drivers
         update_or_create_driver(
             profile_id, first_name, last_name,
             phone, status, callsign,
-            last_transaction, balance, last_order
+            last_transaction, balance, None
         )
+
+def update_last_order_of_drivers():
+    drivers = all_drivers()
+    for driver in drivers:
+        try:
+            last_order = get_last_order_of_driver(driver.profile_id)
+        except Exception as ex:
+            last_order = None
+            print(ex)
+        update_last_order_of_driver(driver, last_order)
+        sleep(2)

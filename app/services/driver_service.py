@@ -1,6 +1,9 @@
 from app.services import *
 from app.models import Driver
 
+def all_drivers():
+    return Driver.objects.all()
+
 def update_or_create_driver(
     profile_id, first_name, last_name, phone,
     status, callsign, last_transaction, balance, last_order 
@@ -23,3 +26,8 @@ def get_driver_by_callsign(callsign):
         return driver
     except:
         return None
+    
+def update_last_order_of_driver(driver: Driver, last_order):
+    driver.last_order = last_order
+    driver.save()
+    return
